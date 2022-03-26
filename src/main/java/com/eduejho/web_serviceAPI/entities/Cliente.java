@@ -1,19 +1,27 @@
 package com.eduejho.web_serviceAPI.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.*;
 
 @Entity(name = "tb_cliente")
 public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String email;
     private String cpfOuCnpj;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "cliente")
+    private List<Endereco> enderecos = new ArrayList<>();
+
+    public Cliente(){}
 
     public Cliente(Long id, String nome, String email, String cpfOuCnpj) {
         this.id = id;
@@ -52,6 +60,10 @@ public class Cliente implements Serializable {
 
     public void setCpfOuCnpj(String cpfOuCnpj) {
         this.cpfOuCnpj = cpfOuCnpj;
+    }
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
     }
 
     @Override
