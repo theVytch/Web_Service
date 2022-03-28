@@ -21,6 +21,10 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "cliente")
+    private Set<Pedido> pedidos = new HashSet<>();
+
     public Cliente(){}
 
     public Cliente(Long id, String nome, String email, String cpfOuCnpj) {
@@ -64,6 +68,10 @@ public class Cliente implements Serializable {
 
     public List<Endereco> getEnderecos() {
         return enderecos;
+    }
+
+    public Set<Pedido> getPedidos() {
+        return pedidos;
     }
 
     @Override

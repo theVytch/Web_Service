@@ -1,13 +1,7 @@
 package com.eduejho.web_serviceAPI.config;
 
-import com.eduejho.web_serviceAPI.entities.Categoria;
-import com.eduejho.web_serviceAPI.entities.Cliente;
-import com.eduejho.web_serviceAPI.entities.Endereco;
-import com.eduejho.web_serviceAPI.entities.Produto;
-import com.eduejho.web_serviceAPI.repositories.CategoriaRepository;
-import com.eduejho.web_serviceAPI.repositories.ClienteRepository;
-import com.eduejho.web_serviceAPI.repositories.EnderecoRepository;
-import com.eduejho.web_serviceAPI.repositories.ProdutoRepository;
+import com.eduejho.web_serviceAPI.entities.*;
+import com.eduejho.web_serviceAPI.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +9,7 @@ import org.springframework.context.annotation.Profile;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Date;
 
 @Configuration
 @Profile("test")
@@ -24,13 +19,15 @@ public class TestConfig implements CommandLineRunner {
     private final EnderecoRepository enderecoRepository;
     private final CategoriaRepository categoriaRepository;
     private final ProdutoRepository produtoRepository;
+    private final PedidoRepository pedidoRepository;
 
     @Autowired
-    public TestConfig(ClienteRepository clienteRepository, EnderecoRepository enderecoRepository, CategoriaRepository categoriaRepository, ProdutoRepository produtoRepository) {
+    public TestConfig(ClienteRepository clienteRepository, EnderecoRepository enderecoRepository, CategoriaRepository categoriaRepository, ProdutoRepository produtoRepository, PedidoRepository pedidoRepository) {
         this.clienteRepository = clienteRepository;
         this.enderecoRepository = enderecoRepository;
         this.categoriaRepository = categoriaRepository;
         this.produtoRepository = produtoRepository;
+        this.pedidoRepository = pedidoRepository;
     }
 
     @Override
@@ -63,5 +60,11 @@ public class TestConfig implements CommandLineRunner {
         clienteRepository.saveAll(Arrays.asList(c1,c2,c3));
         enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
 
+        Pedido ped1 = new Pedido(null, new Date(), c1);
+        Pedido ped2 = new Pedido(null, new Date(), c2);
+        Pedido ped3 = new Pedido(null, new Date(), c1);
+        Pedido ped4 = new Pedido(null, new Date(), c1);
+
+        pedidoRepository.saveAll(Arrays.asList(ped1, ped2, ped3, ped4));
     }
 }
