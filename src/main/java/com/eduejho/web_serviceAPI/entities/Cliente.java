@@ -22,6 +22,10 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<Telefone> telefones = new ArrayList<>();
+
+
     public Cliente(){}
 
     public Cliente(Long id, String nome, String email, String cpfOuCnpj) {
@@ -65,6 +69,10 @@ public class Cliente implements Serializable {
 
     public List<Endereco> getEnderecos() {
         return enderecos;
+    }
+
+    public List<Telefone> getTelefones() {
+        return telefones;
     }
 
     @Override
