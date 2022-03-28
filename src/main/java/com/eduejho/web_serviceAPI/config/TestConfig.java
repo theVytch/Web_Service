@@ -48,6 +48,19 @@ public class TestConfig implements CommandLineRunner {
 
         clienteRepository.saveAll(Arrays.asList(c1,c2,c3));
 
+        Telefone tel1 = new Telefone(null, c1, "44925581111");
+        Telefone tel2 = new Telefone(null, c2, "44969942222");
+        Telefone tel3 = new Telefone(null, c3, "44974153333");
+
+        clienteRepository.saveAll(Arrays.asList(c1,c2,c3));
+
+        c1.getTelefones().add(tel1);
+        c2.getTelefones().add(tel2);
+        c3.getTelefones().add(tel3);
+
+        clienteRepository.saveAll(Arrays.asList(c1,c2,c3));
+
+
         Endereco e1 = new Endereco(null, "rua lirios","123", "casa", "monte rey", "12457812", c1, cid1);
         Endereco e2 = new Endereco(null, "rua cravos","132", "casa", "triangulo", "12457835",c2,  cid2);
         Endereco e3 = new Endereco(null, "rua rosas","321", "casa", "quadrado", "12457821",c3, cid1);
