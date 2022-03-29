@@ -3,7 +3,9 @@ package com.eduejho.web_serviceAPI.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_pedido")
@@ -19,6 +21,9 @@ public class Pedido implements Serializable {
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
+
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<ItemPedido> listaDeItens = new HashSet<>();
 
     public Pedido() {
     }
@@ -51,6 +56,18 @@ public class Pedido implements Serializable {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public Set<ItemPedido> getListaDeItens() {
+        return listaDeItens;
+    }
+
+    public Double total() {
+        Double total = 0.00;
+        for (ItemPedido item : listaDeItens) {
+            total += item.subtotal();
+        }
+        return total;
     }
 
     @Override

@@ -1,8 +1,9 @@
 package com.eduejho.web_serviceAPI.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -22,6 +23,9 @@ public class Produto implements Serializable {
     @ManyToMany
     @JoinTable(name = "tb_produto_categoria", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
     private Set<Categoria> categorias = new HashSet<>();
+
+    @OneToMany(mappedBy = "id.produto")
+    private Set<ItemPedido> listaDeItens = new HashSet();
 
     public Produto() {
     }
@@ -58,6 +62,15 @@ public class Produto implements Serializable {
 
     public Set<Categoria> getCategorias() {
         return categorias;
+    }
+
+    @JsonIgnore
+    public Set<Pedido> getPedidos() {
+        Set<Pedido> pedidos = new HashSet<>();
+        for (ItemPedido item : listaDeItens) {
+            pedidos.add(item.getPedido());
+        }
+        return pedidos;
     }
 
     @Override
