@@ -6,7 +6,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
-@Entity(name = "tb_cliente")
+@Entity
+@Table(name = "tb_cliente")
 public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -20,6 +21,10 @@ public class Cliente implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<Telefone> telefones = new ArrayList<>();
+
 
     public Cliente(){}
 
@@ -64,6 +69,10 @@ public class Cliente implements Serializable {
 
     public List<Endereco> getEnderecos() {
         return enderecos;
+    }
+
+    public List<Telefone> getTelefones() {
+        return telefones;
     }
 
     @Override
