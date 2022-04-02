@@ -1,9 +1,7 @@
 package com.eduejho.web_serviceAPI.config;
 
-<<<<<<< HEAD
 import com.eduejho.web_serviceAPI.entities.*;
 import com.eduejho.web_serviceAPI.repositories.*;
-=======
 import com.eduejho.web_serviceAPI.entities.Categoria;
 import com.eduejho.web_serviceAPI.entities.Cliente;
 import com.eduejho.web_serviceAPI.entities.Endereco;
@@ -12,13 +10,10 @@ import com.eduejho.web_serviceAPI.repositories.CategoriaRepository;
 import com.eduejho.web_serviceAPI.repositories.ClienteRepository;
 import com.eduejho.web_serviceAPI.repositories.EnderecoRepository;
 import com.eduejho.web_serviceAPI.repositories.ProdutoRepository;
->>>>>>> ProdutoECategoriaCreateEntity
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-
-import java.math.BigDecimal;
 import java.util.Arrays;
 
 @Configuration
@@ -27,26 +22,22 @@ public class TestConfig implements CommandLineRunner {
 
     private final ClienteRepository clienteRepository;
     private final EnderecoRepository enderecoRepository;
-<<<<<<< HEAD
     private final CidadeRepository cidadeRepository;
     private final EstadoRepository estadoRepository;
+    private final CategoriaRepository categoriaRepository;
+    private final ProdutoRepository produtoRepository;
+
 
     @Autowired
     public TestConfig(ClienteRepository clienteRepository, EnderecoRepository enderecoRepository,
-                      CidadeRepository cidadeRepository, EstadoRepository estadoRepository) {
+                      CidadeRepository cidadeRepository, EstadoRepository estadoRepository,
+                      CategoriaRepository categoriaRepository, ProdutoRepository produtoRepository) {
         this.clienteRepository = clienteRepository;
         this.enderecoRepository = enderecoRepository;
         this.cidadeRepository = cidadeRepository;
         this.estadoRepository = estadoRepository;
-=======
-    private final CategoriaRepository categoriaRepository;
-    private final ProdutoRepository produtoRepository;
-
-    @Autowired
-    public TestConfig(CategoriaRepository categoriaRepository, ProdutoRepository produtoRepository){
         this.categoriaRepository = categoriaRepository;
         this.produtoRepository = produtoRepository;
->>>>>>> ProdutoECategoriaCreateEntity
     }
 
     @Override
