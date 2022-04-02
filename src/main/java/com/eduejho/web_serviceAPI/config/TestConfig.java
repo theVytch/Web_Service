@@ -1,12 +1,24 @@
 package com.eduejho.web_serviceAPI.config;
 
+<<<<<<< HEAD
 import com.eduejho.web_serviceAPI.entities.*;
 import com.eduejho.web_serviceAPI.repositories.*;
+=======
+import com.eduejho.web_serviceAPI.entities.Categoria;
+import com.eduejho.web_serviceAPI.entities.Cliente;
+import com.eduejho.web_serviceAPI.entities.Endereco;
+import com.eduejho.web_serviceAPI.entities.Produto;
+import com.eduejho.web_serviceAPI.repositories.CategoriaRepository;
+import com.eduejho.web_serviceAPI.repositories.ClienteRepository;
+import com.eduejho.web_serviceAPI.repositories.EnderecoRepository;
+import com.eduejho.web_serviceAPI.repositories.ProdutoRepository;
+>>>>>>> ProdutoECategoriaCreateEntity
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 @Configuration
@@ -15,6 +27,7 @@ public class TestConfig implements CommandLineRunner {
 
     private final ClienteRepository clienteRepository;
     private final EnderecoRepository enderecoRepository;
+<<<<<<< HEAD
     private final CidadeRepository cidadeRepository;
     private final EstadoRepository estadoRepository;
 
@@ -25,6 +38,15 @@ public class TestConfig implements CommandLineRunner {
         this.enderecoRepository = enderecoRepository;
         this.cidadeRepository = cidadeRepository;
         this.estadoRepository = estadoRepository;
+=======
+    private final CategoriaRepository categoriaRepository;
+    private final ProdutoRepository produtoRepository;
+
+    @Autowired
+    public TestConfig(CategoriaRepository categoriaRepository, ProdutoRepository produtoRepository){
+        this.categoriaRepository = categoriaRepository;
+        this.produtoRepository = produtoRepository;
+>>>>>>> ProdutoECategoriaCreateEntity
     }
 
     @Override
@@ -51,6 +73,22 @@ public class TestConfig implements CommandLineRunner {
         Telefone tel1 = new Telefone(null, c1, "44925581111");
         Telefone tel2 = new Telefone(null, c2, "44969942222");
         Telefone tel3 = new Telefone(null, c3, "44974153333");
+
+        Categoria cat1 = new Categoria(null, "Limpeza");
+        Categoria cat2 = new Categoria(null, "Bebida");
+
+        Produto p1 = new Produto(null, "Detergente", 5.50);
+        Produto p2 = new Produto(null, "Coca-cola", 9.00);
+        Produto p3 = new Produto(null, "Cerveja Heineken 330ml", 6.35);
+
+        categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
+        produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+        p1.getCategorias().add(cat2);
+        p2.getCategorias().add(cat1);
+        p3.getCategorias().add(cat2);
+
+        produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 
         clienteRepository.saveAll(Arrays.asList(c1,c2,c3));
 
