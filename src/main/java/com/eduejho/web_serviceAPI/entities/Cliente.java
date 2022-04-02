@@ -25,6 +25,9 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Telefone> telefones = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "cliente")
+    private Set<Pedido> pedidos = new HashSet<>();
 
     public Cliente(){}
 
@@ -73,6 +76,10 @@ public class Cliente implements Serializable {
 
     public List<Telefone> getTelefones() {
         return telefones;
+    }
+
+    public Set<Pedido> getPedidos() {
+        return pedidos;
     }
 
     @Override

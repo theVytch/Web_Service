@@ -15,6 +15,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import java.util.Arrays;
+import java.util.Date;
 
 @Configuration
 @Profile("test")
@@ -26,18 +27,23 @@ public class TestConfig implements CommandLineRunner {
     private final EstadoRepository estadoRepository;
     private final CategoriaRepository categoriaRepository;
     private final ProdutoRepository produtoRepository;
+    private final PedidoRepository pedidoRepository;
+    private final ItemPedidoRepository itemPedidoRepository;
 
 
     @Autowired
     public TestConfig(ClienteRepository clienteRepository, EnderecoRepository enderecoRepository,
                       CidadeRepository cidadeRepository, EstadoRepository estadoRepository,
-                      CategoriaRepository categoriaRepository, ProdutoRepository produtoRepository) {
+                      CategoriaRepository categoriaRepository, ProdutoRepository produtoRepository,
+                      PedidoRepository pedidoRepository, ItemPedidoRepository itemPedidoRepository) {
         this.clienteRepository = clienteRepository;
         this.enderecoRepository = enderecoRepository;
         this.cidadeRepository = cidadeRepository;
         this.estadoRepository = estadoRepository;
         this.categoriaRepository = categoriaRepository;
         this.produtoRepository = produtoRepository;
+        this.pedidoRepository = pedidoRepository;
+        this.itemPedidoRepository = itemPedidoRepository;
     }
 
     @Override
@@ -68,18 +74,18 @@ public class TestConfig implements CommandLineRunner {
         Categoria cat1 = new Categoria(null, "Limpeza");
         Categoria cat2 = new Categoria(null, "Bebida");
 
-        Produto p1 = new Produto(null, "Detergente", 5.50);
-        Produto p2 = new Produto(null, "Coca-cola", 9.00);
-        Produto p3 = new Produto(null, "Cerveja Heineken 330ml", 6.35);
+        Produto prod1 = new Produto(null, "Detergente", 5.50);
+        Produto prod2 = new Produto(null, "Coca-cola", 9.00);
+        Produto prod3 = new Produto(null, "Cerveja Heineken 330ml", 6.35);
 
         categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
-        produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
+        produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3));
 
-        p1.getCategorias().add(cat2);
-        p2.getCategorias().add(cat1);
-        p3.getCategorias().add(cat2);
+        prod1.getCategorias().add(cat2);
+        prod2.getCategorias().add(cat1);
+        prod3.getCategorias().add(cat2);
 
-        produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
+        produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3));
 
         clienteRepository.saveAll(Arrays.asList(c1,c2,c3));
 
@@ -96,5 +102,19 @@ public class TestConfig implements CommandLineRunner {
 
 
         enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
+
+        Pedido ped1 = new Pedido(null, new Date(), c1);
+        Pedido ped2 = new Pedido(null, new Date(), c2);
+        Pedido ped3 = new Pedido(null, new Date(), c1);
+        Pedido ped4 = new Pedido(null, new Date(), c1);
+
+        pedidoRepository.saveAll(Arrays.asList(ped1, ped2, ped3, ped4));
+
+        ItemPedido item1 = new ItemPedido(ped1, prod1, 2);
+        ItemPedido item2 = new ItemPedido(ped1, prod2, 1);
+        ItemPedido item3 = new ItemPedido(ped2, prod3, 6);
+
+        itemPedidoRepository.saveAll(Arrays.asList(item1, item2, item3));
+
     }
 }
