@@ -29,8 +29,6 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "endereco_id")
     private Endereco enderecoDeEntrega;
 
-
-
     public Pedido() {
     }
 
