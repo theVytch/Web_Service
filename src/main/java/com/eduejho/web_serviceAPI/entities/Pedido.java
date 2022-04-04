@@ -25,13 +25,20 @@ public class Pedido implements Serializable {
     @OneToMany(mappedBy = "id.pedido")
     private Set<ItemPedido> listaDeItens = new HashSet<>();
 
+    @OneToOne
+    @JoinColumn(name = "endereco_id")
+    private Endereco enderecoDeEntrega;
+
+
+
     public Pedido() {
     }
 
-    public Pedido(Long id, Date instante, Cliente cliente) {
+    public Pedido(Long id, Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
         this.id = id;
         this.instante = instante;
         this.cliente = cliente;
+        this.enderecoDeEntrega = enderecoDeEntrega;
     }
 
     public Long getId() {
@@ -60,6 +67,14 @@ public class Pedido implements Serializable {
 
     public Set<ItemPedido> getListaDeItens() {
         return listaDeItens;
+    }
+
+    public Endereco getEnderecoDeEntrega() {
+        return enderecoDeEntrega;
+    }
+
+    public void setEnderecoDeEntrega(Endereco enderecoDeEntrega) {
+        this.enderecoDeEntrega = enderecoDeEntrega;
     }
 
     public Double total() {
