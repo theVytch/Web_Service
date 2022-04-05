@@ -29,13 +29,17 @@ public class TestConfig implements CommandLineRunner {
     private final ProdutoRepository produtoRepository;
     private final PedidoRepository pedidoRepository;
     private final ItemPedidoRepository itemPedidoRepository;
+    private final PagamentoRepository<PagamentoComBoleto> pagamentoComBoletoRepository;
+    private final PagamentoRepository<PagamentoComCartao> pagamentoComCartaoRepository;
 
 
     @Autowired
     public TestConfig(ClienteRepository clienteRepository, EnderecoRepository enderecoRepository,
                       CidadeRepository cidadeRepository, EstadoRepository estadoRepository,
                       CategoriaRepository categoriaRepository, ProdutoRepository produtoRepository,
-                      PedidoRepository pedidoRepository, ItemPedidoRepository itemPedidoRepository) {
+                      PedidoRepository pedidoRepository, ItemPedidoRepository itemPedidoRepository,
+                      PagamentoRepository<PagamentoComBoleto> pagamentoComBoletoRepository,
+                      PagamentoRepository<PagamentoComCartao> pagamentoComCartaoRepository) {
         this.clienteRepository = clienteRepository;
         this.enderecoRepository = enderecoRepository;
         this.cidadeRepository = cidadeRepository;
@@ -44,6 +48,8 @@ public class TestConfig implements CommandLineRunner {
         this.produtoRepository = produtoRepository;
         this.pedidoRepository = pedidoRepository;
         this.itemPedidoRepository = itemPedidoRepository;
+        this.pagamentoComBoletoRepository = pagamentoComBoletoRepository;
+        this.pagamentoComCartaoRepository = pagamentoComCartaoRepository;
     }
 
     @Override
@@ -100,15 +106,21 @@ public class TestConfig implements CommandLineRunner {
         Endereco e2 = new Endereco(null, "rua cravos","132", "casa", "triangulo", "12457835",c2,  cid2);
         Endereco e3 = new Endereco(null, "rua rosas","321", "casa", "quadrado", "12457821",c3, cid1);
 
-
         enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
 
-        Pedido ped1 = new Pedido(null, new Date(), c1);
-        Pedido ped2 = new Pedido(null, new Date(), c2);
-        Pedido ped3 = new Pedido(null, new Date(), c1);
-        Pedido ped4 = new Pedido(null, new Date(), c1);
+
+        Pedido ped1 = new Pedido(null, new Date(), c1, e1);
+        Pedido ped2 = new Pedido(null, new Date(), c2, e1);
+        Pedido ped3 = new Pedido(null, new Date(), c1, e2);
+        Pedido ped4 = new Pedido(null, new Date(), c1, e3);
 
         pedidoRepository.saveAll(Arrays.asList(ped1, ped2, ped3, ped4));
+
+        PagamentoComCartao pag1 = new PagamentoComCartao( null,ped4,2);
+        PagamentoComBoleto pag2 = new PagamentoComBoleto( null, ped2, new Date(), new Date());
+
+        pagamentoComCartaoRepository.save(pag1);
+        pagamentoComBoletoRepository.save(pag2);
 
         ItemPedido item1 = new ItemPedido(ped1, prod1, 2);
         ItemPedido item2 = new ItemPedido(ped1, prod2, 1);
