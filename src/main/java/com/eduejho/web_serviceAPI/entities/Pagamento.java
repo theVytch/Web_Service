@@ -12,7 +12,23 @@ public abstract class Pagamento implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+//    @OneToMany(mappedBy = "pagamento")
+//    private Pedido pedido;
+
+    @OneToOne
+    @JoinColumn(name = "pedido_id")
+    private Pedido pedido;
+
     public Pagamento(){}
+
+    public Pagamento(Long id, Pedido pedido){
+        this.id = id;
+        this.pedido = pedido;
+    }
+
+//    public Pagamento(Long id){
+//        this.id = id;
+//    }
 
     public Long getId() {
         return id;
@@ -20,6 +36,14 @@ public abstract class Pagamento implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
     @Override

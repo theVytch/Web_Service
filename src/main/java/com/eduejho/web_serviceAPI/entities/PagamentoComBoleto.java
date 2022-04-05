@@ -6,20 +6,24 @@ import java.util.Date;
 @Entity
 @Table(name="tb_pagamento_com_boleto")
 public class PagamentoComBoleto extends Pagamento{
+    private static final long serialVersionUID = 1L;
 
     private Date datavencimento;
     private Date dataPagamento;
 
-    @OneToOne
-    @JoinColumn(name = "pedido_id")
-    private Pedido pedido;
+    public PagamentoComBoleto(){}
 
-    public PagamentoComBoleto(Date datavencimento, Date dataPagamento, Pedido pedido) {
-        super();
+    public PagamentoComBoleto(Long id, Pedido pedido, Date datavencimento, Date dataPagamento) {
+        super(id, pedido);
         this.datavencimento = datavencimento;
         this.dataPagamento = dataPagamento;
-        this.pedido = pedido;
     }
+
+//    public PagamentoComBoleto(Long id, Date datavencimento, Date dataPagamento) {
+//        super(id);
+//        this.datavencimento = datavencimento;
+//        this.dataPagamento = dataPagamento;
+//    }
 
     public Date getDatavencimento() {
         return datavencimento;

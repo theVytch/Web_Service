@@ -5,18 +5,21 @@ import javax.persistence.*;
 @Entity
 @Table(name="tb_pagamento_com_cartao")
 public class PagamentoComCartao extends Pagamento{
+    private static final long serialVersionUID = 1L;
 
     private Integer numeroDeParcelas;
 
-    @OneToOne
-    @JoinColumn(name = "pedido_id")
-    private Pedido pedido;
+    public PagamentoComCartao(){}
 
-    public PagamentoComCartao(Integer numeroDeParcelas, Pedido pedido) {
-        super();
+    public PagamentoComCartao(Long id, Pedido pedido, Integer numeroDeParcelas) {
+        super(id, pedido);
         this.numeroDeParcelas = numeroDeParcelas;
-        this.pedido = pedido;
     }
+
+//    public PagamentoComCartao(Long id, Integer numeroDeParcelas) {
+//        super(id);
+//        this.numeroDeParcelas = numeroDeParcelas;
+//    }
 
     public Integer getNumeroDeParcelas() {
         return numeroDeParcelas;

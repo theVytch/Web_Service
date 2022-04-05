@@ -1,7 +1,11 @@
 package com.eduejho.web_serviceAPI.repositories;
 
-import org.springframework.stereotype.Repository;
+import com.eduejho.web_serviceAPI.entities.PagamentoComCartao;
 
-@Repository
-public interface PagamentoComCartaoRepository extends PagamentoRepository{
+import javax.transaction.Transactional;
+
+@Transactional
+public interface PagamentoComCartaoRepository extends PagamentoRepository<PagamentoComCartao>{
+
+
 }

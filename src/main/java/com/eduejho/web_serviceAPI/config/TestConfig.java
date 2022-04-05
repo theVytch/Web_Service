@@ -29,9 +29,8 @@ public class TestConfig implements CommandLineRunner {
     private final ProdutoRepository produtoRepository;
     private final PedidoRepository pedidoRepository;
     private final ItemPedidoRepository itemPedidoRepository;
-    private final PagamentoComBoletoRepository pagamentoComBoletoRepository;
-    private final PagamentoComCartaoRepository pagamentoComCartaoRepository;
-
+    private final PagamentoRepository<PagamentoComBoleto> pagamentoComBoletoRepository;
+    private final PagamentoRepository<PagamentoComCartao> pagamentoComCartaoRepository;
 
 
     @Autowired
@@ -39,8 +38,8 @@ public class TestConfig implements CommandLineRunner {
                       CidadeRepository cidadeRepository, EstadoRepository estadoRepository,
                       CategoriaRepository categoriaRepository, ProdutoRepository produtoRepository,
                       PedidoRepository pedidoRepository, ItemPedidoRepository itemPedidoRepository,
-                      PagamentoComBoletoRepository pagamentoComBoletoRepository,
-                      PagamentoComCartaoRepository pagamentoComCartaoRepository) {
+                      PagamentoRepository<PagamentoComBoleto> pagamentoComBoletoRepository,
+                      PagamentoRepository<PagamentoComCartao> pagamentoComCartaoRepository) {
         this.clienteRepository = clienteRepository;
         this.enderecoRepository = enderecoRepository;
         this.cidadeRepository = cidadeRepository;
@@ -109,6 +108,7 @@ public class TestConfig implements CommandLineRunner {
 
         enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
 
+
         Pedido ped1 = new Pedido(null, new Date(), c1, e1);
         Pedido ped2 = new Pedido(null, new Date(), c2, e1);
         Pedido ped3 = new Pedido(null, new Date(), c1, e2);
@@ -116,8 +116,8 @@ public class TestConfig implements CommandLineRunner {
 
         pedidoRepository.saveAll(Arrays.asList(ped1, ped2, ped3, ped4));
 
-        Pagamento pag1 = new PagamentoComCartao( 2, ped1);
-        Pagamento pag2 = new PagamentoComBoleto( new Date(), new Date(), ped2);
+        PagamentoComCartao pag1 = new PagamentoComCartao( null,ped4,2);
+        PagamentoComBoleto pag2 = new PagamentoComBoleto( null, ped2, new Date(), new Date());
 
         pagamentoComCartaoRepository.save(pag1);
         pagamentoComBoletoRepository.save(pag2);

@@ -1,7 +1,9 @@
 package com.eduejho.web_serviceAPI.repositories;
 
-import org.springframework.stereotype.Repository;
+import com.eduejho.web_serviceAPI.entities.PagamentoComBoleto;
 
-@Repository
-public interface PagamentoComBoletoRepository extends PagamentoRepository{
+import javax.transaction.Transactional;
+
+@Transactional
+public interface PagamentoComBoletoRepository extends PagamentoRepository<PagamentoComBoleto>{
 }
