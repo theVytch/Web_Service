@@ -3,9 +3,11 @@ package com.eduejho.web_serviceAPI.services;
 import com.eduejho.web_serviceAPI.entities.Cidade;
 import com.eduejho.web_serviceAPI.entities.Cliente;
 import com.eduejho.web_serviceAPI.repositories.ClienteRepository;
+import com.eduejho.web_serviceAPI.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,5 +32,21 @@ public class ClienteService {
 
     public void delete(Long id){
         clienteRepository.deleteById(id);
+    }
+
+    public Cliente update(Long id, Cliente obj) {
+        try {
+            Cliente entity = clienteRepository.getById(id);
+            updateData(entity, obj);
+            return clienteRepository.save(entity);
+        } catch(EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
+    }
+
+    private void updateData(Cliente entity, Cliente obj) {
+        entity.setNome(obj.getNome());
+        entity.setEmail(obj.getEmail());
+        entity.setCpfOuCnpj(obj.getCpfOuCnpj());
     }
 }
