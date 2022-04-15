@@ -1,4 +1,4 @@
-package com.eduejho.web_serviceAPI.resources;
+package com.eduejho.web_serviceAPI.entities.pk;
 
 import com.eduejho.web_serviceAPI.entities.Pedido;
 import com.eduejho.web_serviceAPI.entities.Produto;
@@ -11,7 +11,6 @@ import java.util.Objects;
 
 @Embeddable
 public class ItemPedidoPK implements Serializable {
-
     public static final long serialVersionUID = 1L;
 
     @ManyToOne

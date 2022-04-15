@@ -122,11 +122,10 @@ public class TestConfig implements CommandLineRunner {
         pagamentoComCartaoRepository.save(pag1);
         pagamentoComBoletoRepository.save(pag2);
 
-        ItemPedido item1 = new ItemPedido(ped1, prod1, 2);
-        ItemPedido item2 = new ItemPedido(ped1, prod2, 1);
-        ItemPedido item3 = new ItemPedido(ped2, prod3, 6);
+        ItemPedido item1 = new ItemPedido(ped1, prod1, 2, prod1.getPreco());
+        ItemPedido item2 = new ItemPedido(ped1, prod2, 1, prod2.getPreco());
+        ItemPedido item3 = new ItemPedido(ped2, prod3, 6, prod3.getPreco());
 
         itemPedidoRepository.saveAll(Arrays.asList(item1, item2, item3));
-
     }
 }
