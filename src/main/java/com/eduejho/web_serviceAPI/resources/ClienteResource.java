@@ -1,6 +1,5 @@
 package com.eduejho.web_serviceAPI.resources;
 
-import com.eduejho.web_serviceAPI.entities.Cidade;
 import com.eduejho.web_serviceAPI.entities.Cliente;
 import com.eduejho.web_serviceAPI.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping("/api/clientes")
 public class ClienteResource {
 
     @Autowired

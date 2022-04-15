@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pedidos")
+@RequestMapping("pedidos")
 public class PedidoResource {
 
     @Autowired
@@ -38,5 +38,12 @@ public class PedidoResource {
     public ResponseEntity<Void> delete(@PathVariable Long id){
         pedidoService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<Pedido>> findById(@RequestParam(value = "cpfOuCnpj", required = false, defaultValue = "") String cpfOuCnpj){
+        List<Pedido> lista = pedidoService.findByCpfOuCnpjCliente(cpfOuCnpj);
+        return ResponseEntity.ok().body(lista);
     }
 }

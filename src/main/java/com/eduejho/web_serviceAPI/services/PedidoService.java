@@ -30,4 +30,8 @@ public class PedidoService {
     public void delete(Long id){
         pedidoRepository.deleteById(id);
     }
+
+    public List<Pedido> findByCpfOuCnpjCliente(String cpfOuCnpj){
+        return pedidoRepository.findByCpfOuCnpjCliente(cpfOuCnpj);
+    }
 }
