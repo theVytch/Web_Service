@@ -16,4 +16,5 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     @Query("select s from Pedido s join s.cliente c " +
             "where upper(c.cpfOuCnpj) like upper (:cpfOuCnpj)")
     List<Pedido> findByCpfOuCnpjCliente(@Param("cpfOuCnpj") String cpfOuCnpj);
+
 }

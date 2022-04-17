@@ -1,5 +1,7 @@
 package com.eduejho.web_serviceAPI.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -15,6 +17,8 @@ public class Pedido implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date instante;
 
     @ManyToOne

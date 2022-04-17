@@ -1,5 +1,6 @@
 package com.eduejho.web_serviceAPI.resources;
 
+import com.eduejho.web_serviceAPI.entities.ItemPedido;
 import com.eduejho.web_serviceAPI.entities.Pedido;
 import com.eduejho.web_serviceAPI.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("pedidos")
+@RequestMapping("/api/pedidos")
 public class PedidoResource {
 
     @Autowired
@@ -46,4 +47,11 @@ public class PedidoResource {
         List<Pedido> lista = pedidoService.findByCpfOuCnpjCliente(cpfOuCnpj);
         return ResponseEntity.ok().body(lista);
     }
+
+    @GetMapping("/itempedido/{id}")
+    public ResponseEntity<List<ItemPedido>> findByIdPedido(@PathVariable Long id){
+        List<ItemPedido> lista = pedidoService.findByIdPedido(id);
+        return ResponseEntity.ok().body(lista);
+    }
+
 }
