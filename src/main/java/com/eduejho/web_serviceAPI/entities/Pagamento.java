@@ -12,9 +12,6 @@ public abstract class Pagamento implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-//    @OneToMany(mappedBy = "pagamento")
-//    private Pedido pedido;
-
     @OneToOne
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
@@ -25,10 +22,6 @@ public abstract class Pagamento implements Serializable {
         this.id = id;
         this.pedido = pedido;
     }
-
-//    public Pagamento(Long id){
-//        this.id = id;
-//    }
 
     public Long getId() {
         return id;

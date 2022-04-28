@@ -82,16 +82,31 @@ public class TestConfig implements CommandLineRunner {
 
         Produto prod1 = new Produto(null, "Detergente", 5.50);
         Produto prod2 = new Produto(null, "Coca-cola", 9.00);
-        Produto prod3 = new Produto(null, "Cerveja Heineken 330ml", 6.35);
+        Produto prod3 = new Produto(null, "Pepsi", 6.35);
+        Produto prod4 = new Produto(null, "Fanta", 9.00);
+        Produto prod5 = new Produto(null, "Sprite", 6.35);
+        Produto prod6 = new Produto(null, "Guarana", 9.00);
+        Produto prod7 = new Produto(null, "Skol", 6.35);
+        Produto prod8 = new Produto(null, "Vodka", 9.00);
+        Produto prod9 = new Produto(null, "Agua", 6.35);
+        Produto prod10 = new Produto(null, "brahma", 9.00);
 
         categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
-        produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3));
+        produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7,prod8, prod9, prod10));
 
         prod1.getCategorias().add(cat2);
         prod2.getCategorias().add(cat1);
         prod3.getCategorias().add(cat2);
 
-        produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3));
+        prod4.getCategorias().add(cat2);
+        prod5.getCategorias().add(cat2);
+        prod6.getCategorias().add(cat2);
+        prod7.getCategorias().add(cat2);
+        prod8.getCategorias().add(cat2);
+        prod9.getCategorias().add(cat2);
+        prod10.getCategorias().add(cat2);
+
+        produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7,prod8, prod9, prod10));
 
         clienteRepository.saveAll(Arrays.asList(c1,c2,c3));
 

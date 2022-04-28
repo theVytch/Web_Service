@@ -25,7 +25,7 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "id.pedido")
+    @OneToMany(mappedBy = "id.pedido", cascade = CascadeType.ALL)
     private Set<ItemPedido> listaDeItens = new HashSet<>();
 
     @OneToOne
@@ -84,6 +84,11 @@ public class Pedido implements Serializable {
             total += item.subtotal();
         }
         return total;
+    }
+
+    public void adicionarItem(ItemPedido item){
+        item.setPedido(this);
+        this.listaDeItens.add(item);
     }
 
     @Override

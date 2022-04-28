@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -41,7 +40,6 @@ public class PedidoResource {
         return ResponseEntity.noContent().build();
     }
 
-
     @GetMapping("/filter")
     public ResponseEntity<List<Pedido>> findById(@RequestParam(value = "cpfOuCnpj", required = false, defaultValue = "") String cpfOuCnpj){
         List<Pedido> lista = pedidoService.findByCpfOuCnpjCliente(cpfOuCnpj);
@@ -49,8 +47,8 @@ public class PedidoResource {
     }
 
     @GetMapping("/itempedido/{id}")
-    public ResponseEntity<List<ItemPedido>> findByIdPedido(@PathVariable Long id){
-        List<ItemPedido> lista = pedidoService.findByIdPedido(id);
+    public ResponseEntity<List<ItemPedido>> findItemPedidoByIdPedido(@PathVariable Long id){
+        List<ItemPedido> lista = pedidoService.findItemPedidoByIdPedido(id);
         return ResponseEntity.ok().body(lista);
     }
 

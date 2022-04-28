@@ -2,7 +2,6 @@ package com.eduejho.web_serviceAPI.services;
 
 import com.eduejho.web_serviceAPI.entities.ItemPedido;
 import com.eduejho.web_serviceAPI.entities.Pedido;
-import com.eduejho.web_serviceAPI.entities.pk.ItemPedidoPK;
 import com.eduejho.web_serviceAPI.repositories.ItemPedidoRepository;
 import com.eduejho.web_serviceAPI.repositories.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +39,7 @@ public class PedidoService {
         return pedidoRepository.findByCpfOuCnpjCliente(cpfOuCnpj);
     }
 
-    public List<ItemPedido> findByIdPedido(Long id){
-        return itemPedidoRepository.findByIdPedido(id);
+    public List<ItemPedido> findItemPedidoByIdPedido(Long id){
+        return itemPedidoRepository.findItemPedidoByIdPedido(id);
     }
 }

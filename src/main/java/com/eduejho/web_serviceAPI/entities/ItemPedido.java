@@ -28,7 +28,7 @@ public class ItemPedido implements Serializable {
         id.setPedido(pedido);
         id.setProduto(produto);
         this.quantidade = quantidade;
-        this.preco = preco;
+        this.preco = produto.getPreco();
     }
 
     @JsonIgnore

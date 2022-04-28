@@ -13,5 +13,5 @@ import java.util.List;
 public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Long> {
 
     @Query("select s from ItemPedido s where pedido_id = :id ")
-    List<ItemPedido> findByIdPedido(@Param("id") Long id);
+    List<ItemPedido> findItemPedidoByIdPedido(@Param("id") Long id);
 }
